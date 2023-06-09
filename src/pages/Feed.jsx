@@ -9,11 +9,26 @@ import FeedDetail from "../components/FeedDetail";
 import { useSelector } from "react-redux";
 import Swal from "sweetalert2";
 import { useInView } from "react-intersection-observer";
+import ScrollToTopButton from "../components/ScrollToTopButton";
+import { useNavigate } from "react-router-dom";
 
 function Feed() {
+  const navigate = useNavigate;
   const isLoggedIn = useSelector((state) => state.user.isLoggedIn);
   // 모달 제어
   const [feedDetailOpen, setFeedDetailOpen] = useState([]);
+  const [showButton, setShowButton] = useState(false);
+
+  const ShowButtonClick = () => {
+    const { scrollY } = window;
+    scrollY > 200 ? setShowButton(true) : setShowButton(false);
+  };
+  useEffect(() => {
+    window.addEventListener("scroll", ShowButtonClick);
+    return () => {
+      window.removeEventListener("scroll", ShowButtonClick);
+    };
+  }, []);
 
   const openFeedDetail = (photoId) => {
     if (isLoggedIn) {
@@ -62,10 +77,8 @@ function Feed() {
   }
 
   if (isError) {
-    return <h1>오류가 발생하였습니다...!</h1>;
+    return <h3>에러가 발생하였습니다.</h3>;
   }
-
-  // console.log(data);
 
   return (
     <>
@@ -95,35 +108,20 @@ function Feed() {
           })}
         <div ref={bottomObserverRef}></div>
       </FeedContainer>
+      {showButton && <ScrollToTopButton />}
     </>
   );
 }
 
 export default Feed;
+
 const FeedContainer = styled.div`
-  padding: 20px 10px 20px 10px;
+  padding: 30px 0 30px 0;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 50px;
   margin: auto 100px;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 60px;
-  /* background-color: green; */
+  @media (max-width: 768px) {
+    grid-template-columns: repeat(1, 1fr);
+  }
 `;
-
-const Cards = styled.div`
-  width: 24%;
-  background: black;
-  margin: 5px;
-`;
-
-const CardsImg = styled.div`
-  width: 100%;
-  height: 0;
-  padding-bottom: 100%;
-  background-image: url(${(props) => props.src});
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: center;
-  cursor: pointer;
-`;
-
-//////////////////////////////////////

@@ -55,7 +55,6 @@ const MyPage = () => {
   if (isError) {
     return <h1>오류(⊙ˍ⊙)</h1>;
   }
-  console.log(data);
   return (
     <>
       {mine && <MyPageTabs pageName={"전체보기"} />}
@@ -157,12 +156,6 @@ const Work = styled.h2`
   font-size: 24px;
   font-weight: bold;
   margin-bottom: 1rem;
-`;
-
-const WorkBoard = styled.h2`
-  font-size: 24px;
-  font-weight: bold;
-  margin: 100px 0 1rem 0;
 `;
 
 const WorkList = styled.div`
