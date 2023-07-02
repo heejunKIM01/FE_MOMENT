@@ -15,7 +15,7 @@
 >
 > 💛 [모먼트 노션](https://www.notion.so/Moment-7c56ea546ba44ab286ce1cdbaea7ecd7)
 >
-> 💜 [모먼트 원페이지 노션?]
+> 💜 [모먼트 원페이지 노션](https://traveling-linen-5a5.notion.site/MOMENT-a9deefc5f91244b7905fbc392bed17e1?pvs=4)
 
 
 ## 팀
